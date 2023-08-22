@@ -1,5 +1,6 @@
 package com.hello.springmvc.basic.request;
 
+import com.hello.springmvc.basic.HelloData;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -73,9 +74,20 @@ public class RequestParamController {
     @ResponseBody
     @RequestMapping("/request-param-map")
     public String requestParamMap(@RequestParam Map<String, Object> paramMap) {
-
         log.info("username={}, age={}", paramMap.get("username"), paramMap.get("age"));
-
         return "ok";
+    }
+
+    @ResponseBody
+    @RequestMapping("/model-attribute-v1")
+    public String modelAttributeV1(@RequestParam String username, @RequestParam int age) {
+        HelloData helloData = new HelloData();
+        helloData.setUsername(username);
+        helloData.setAge(age);
+
+        log.info("username={}, age={}", username, age);
+        log.info("hellData={}", helloData);
+
+        return "";
     }
 }
